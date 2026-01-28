@@ -1,0 +1,51 @@
+<app-auth-shell
+    [brand]="'Global tax service'"
+    [title]="'Mi perfil'"
+    [subtitle]="'Tu información básica'"
+>
+    <div class="mt-6 space-y-4">
+        <div *ngIf="isLoading" class="rounded-2xl bg-white/60 border border-white/70 p-4">
+            <div class="h-3 w-24 rounded bg-slate-900/10"></div>
+            <div class="mt-3 h-4 w-56 rounded bg-slate-900/10"></div>
+        </div>
+
+        <p *ngIf="error" class="text-sm text-rose-600">
+            {{ error }}
+        </p>
+
+        <div *ngIf="!isLoading && me" class="rounded-2xl bg-white/70 border border-white/80 p-4 space-y-2">
+            <p class="text-slate-700">
+                <span class="text-slate-500">ID:</span>
+                <span class="font-medium text-slate-900">{{ me.id }}</span>
+            </p>
+
+            <p class="text-slate-700">
+                <span class="text-slate-500">Email:</span>
+                <span class="font-medium text-slate-900">{{ me.email }}</span>
+            </p>
+
+            <p class="text-slate-700">
+                <span class="text-slate-500">Roles:</span>
+                <span class="font-medium text-slate-900">{{ me.roles.join(', ') }}</span>
+            </p>
+
+            <div class="pt-2 flex gap-2">
+                <button
+                    type="button"
+                    (click)="refresh()"
+                    class="flex-1 rounded-xl bg-slate-900 text-white font-semibold py-2.5 hover:bg-slate-800 transition"
+                >
+                    Refrescar
+                </button>
+
+                <button
+                    type="button"
+                    (click)="logout()"
+                    class="flex-1 rounded-xl bg-white/70 border border-white/80 text-slate-900 font-semibold py-2.5 hover:bg-white/90 transition"
+                >
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+</app-auth-shell>

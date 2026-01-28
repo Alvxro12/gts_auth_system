@@ -1,0 +1,65 @@
+<app-auth-shell
+    [brand]="'Global tax service'"
+    [title]="'Crear cuenta'"
+    [subtitle]="'Regístrate en segundos'"
+>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-6 space-y-4">
+        <div>
+            <label class="text-sm font-medium text-slate-700">Email</label>
+            <input
+                type="email"
+                formControlName="email"
+                class="mt-2 w-full rounded-xl bg-white/70 border border-white/80 px-3 py-2 text-slate-900 placeholder:text-slate-400
+                       outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-300/40"
+                placeholder="tucorreo@ejemplo.com"
+            />
+            <p *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="mt-2 text-xs text-rose-600">
+                Ingresa un email válido.    
+            </p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-slate-700">Password</label>
+            <input
+                type="password"
+                formControlName="password"
+                class="mt-2 w-full rounded-xl bg-white/70 border border-white/80 px-3 py-2 text-slate-900 placeholder:text-slate-400
+                       outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-300/40"
+                placeholder="••••••••"
+            />
+            <p *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="mt-2 text-xs text-rose-600">
+                Mínimo 6 caracteres.
+            </p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-slate-700">Confirm password</label>
+            <input
+                type="password"
+                formControlName="confirmPassword"
+                class="mt-2 w-full rounded-xl bg-white/70 border border-white/80 px-3 py-2 text-slate-900 placeholder:text-slate-400
+                       outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-300/40"
+                placeholder="••••••••"
+            />
+        </div>
+
+        <p *ngIf="error" class="text-sm text-rose-600">
+            {{ error }}
+        </p>
+
+        <button
+            type="submit"
+            [disabled]="isSubmitting"
+            class="w-full rounded-xl bg-slate-900 text-white font-semibold py-2.5
+                   hover:bg-slate-800 transition
+                   disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+            {{ isSubmitting ? 'Creando...' : 'Crear cuenta' }}
+        </button>
+
+        <p class="text-sm text-center text-slate-600">
+            ¿Ya tienes cuenta?
+            <a routerLink="/login" class="font-medium text-slate-900 hover:underline">Login</a>
+        </p>
+    </form>
+</app-auth-shell>
